@@ -1,0 +1,68 @@
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+        <div class="container">
+
+            <!-- Brand -->
+            <a class="navbar-brand waves-effect" href="../../">
+                <strong class="blue-text">AllNails</strong>
+            </a>
+
+            <!-- Collapse -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Links -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left -->
+                <ul class="navbar-nav mr-auto">
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect" href="/add/">Добавить салон </a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="about">About us </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="https://www.google.com/search?newwindow=1&rlz=1C1GGRV_enRU787RU787&sxsrf=ALeKk00zJC-JJTh4mb_-w3PpxhwoRH6vuA:1589800210899&q=%D0%B7%D0%B0%D0%BB%D0%BE%D0%BD+%D0%BA%D1%80%D0%B0%D1%81%D0%BE%D1%82%D0%B8&npsic=0&rflfq=1&rlha=0&rllag=43095536,131923176,2012&tbm=lcl&ved=2ahUKEwj79NWmo73pAhWn16YKHaKyBRgQtgN6BAgOEAQ&tbs=lrf:!1m4!1u3!2m2!3m1!1e1!1m4!1u2!2m2!2m1!1e1!1m4!1u16!2m2!16m1!1e1!1m4!1u16!2m2!16m1!1e2!2m1!1e2!2m1!1e16!2m1!1e3!3sIAE,lf:1,lf_ui:2&rldoc=1#rlfi=hd:;si:;mv:[[43.1316073,131.9776282],[43.084684499999995,131.8717278]];tbs:lrf:!1m4!1u3!2m2!3m1!1e1!1m4!1u2!2m2!2m1!1e1!1m4!1u16!2m2!16m1!1e1!1m4!1u16!2m2!16m1!1e2!2m1!1e2!2m1!1e16!2m1!1e3!3sIAE,lf:1,lf_ui:2">Location</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="//www.youtube.com/embed/eNTYjxn8TbU?autoplay=1">News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="gallery">Gallery</a>
+                    </li>
+                </ul>
+
+                <!-- Right -->
+                <ul class="navbar-nav nav-flex-icons">
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect" href="/admin/">
+                                <i class="fas fa-users" ></i>
+                                <span class="clearfix d-none d-sm-inline-block" > Profile </span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect" href="{% url 'account_logout' %}">
+                                <span class="clearfix d-none d-sm-inline-block"> Logout </span>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect" href="{% url 'account_login' %}">
+                                <span class="clearfix d-none d-sm-inline-block"> Login </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect" href="{% url 'account_signup' %}">
+                                <span class="clearfix d-none d-sm-inline-block"> Signup </span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+
+        </div>
+    </nav>
