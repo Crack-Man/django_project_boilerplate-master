@@ -1,7 +1,7 @@
 from django import forms
 from .models import Image, Item, New
 from django.forms import ModelForm
-
+from django.contrib.auth import get_user_model
 CAT_CHOICES = (
     ('S', 'Professional'),
     ('SW', 'Normal'),
@@ -64,3 +64,17 @@ class News(forms.ModelForm):
 
 class Images(forms.ModelForm):
     Image = forms.ImageField(label="Добавьте картинку")
+
+class SignupForm(forms.ModelForm):
+    first_name = forms.CharField(max_length=100)
+    last_name = forms.CharField(max_length=100)
+    category = forms.ChoiceField()
+    class Meta:
+        model = get_user_model()
+        fields = ['first_name', 'last_name']
+
+    def signup(self, request, user):
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        
+        user.save()

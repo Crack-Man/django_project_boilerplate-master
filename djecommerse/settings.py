@@ -100,3 +100,4 @@ LOGIN_REDIRECT_URL = '/'
 DEFAULT_FROM_EMAIL = "mail@example.com"
 EMAIL_HOST = "localhost"
 EMAIL_PORT = "1025"
+ACCOUNT_SIGNUP_FORM_CLASS = 'core.forms.SignupForm'

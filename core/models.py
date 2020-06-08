@@ -15,6 +15,7 @@ CATEGORY_USER = (
 )
 
 
+
 class Item(models.Model):
     title = models.CharField("Название салона", max_length=100)
     price = models.CharField("Стоимость", max_length=100)
