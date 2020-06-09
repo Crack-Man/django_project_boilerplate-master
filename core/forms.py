@@ -2,10 +2,17 @@ from django import forms
 from .models import Image, Item, New
 from django.forms import ModelForm
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group
+
 CAT_CHOICES = (
     ('S', 'Professional'),
     ('SW', 'Normal'),
     ('OW', 'At home')
+)
+
+CATEGORY_USER = (
+    ('К', 'Клиент'),
+    ('М', 'Мастер')
 )
 
 
@@ -65,10 +72,12 @@ class News(forms.ModelForm):
 class Images(forms.ModelForm):
     Image = forms.ImageField(label="Добавьте картинку")
 
+
 class SignupForm(forms.ModelForm):
-    first_name = forms.CharField(max_length=100)
-    last_name = forms.CharField(max_length=100)
-    category = forms.ChoiceField()
+    first_name = forms.CharField(label='Имя', max_length=100)
+    last_name = forms.CharField(label='Фамилия', max_length=100)
+    category = forms.ChoiceField(label='Категория', choices=CATEGORY_USER)
+
     class Meta:
         model = get_user_model()
         fields = ['first_name', 'last_name']
@@ -76,5 +85,10 @@ class SignupForm(forms.ModelForm):
     def signup(self, request, user):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
-        
+        category = self.cleaned_data['category']
+
         user.save()
+        if category == 'К':
+            user.groups.add(Group.objects.get(name='Клиент'))
+        elif category == 'М':
+            user.groups.add(Group.objects.get(name='Мастер'))
