@@ -2,7 +2,7 @@
         <div class="container">
 
             <!-- Brand -->
-            <a class="navbar-brand waves-effect" href="../../">
+            <a class="navbar-brand waves-effect" href="/./">
                 <strong class="blue-text">AllNails</strong>
             </a>
 
@@ -34,27 +34,38 @@
                 <!-- Right -->
                 <ul class="navbar-nav nav-flex-icons">
                     {% if request.user.is_authenticated %}
+                        {% for group in user.groups.all %}
+                            {% if group.name == 'Модератор' %}
+                                <li class="nav-item">
+                                    <a class="nav-link waves-effect" href="/moder/">
+                                        <i class="fas fa-users" ></i>
+                                        <span class="clearfix d-none d-sm-inline-block" > Модератор </span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                       
                         <li class="nav-item">
                             <a class="nav-link waves-effect" href="/admin/">
                                 <i class="fas fa-users" ></i>
-                                <span class="clearfix d-none d-sm-inline-block" > Profile </span>
+                                <span class="clearfix d-none d-sm-inline-block" > Профиль </span>
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a class="nav-link waves-effect" href="{% url 'account_logout' %}">
-                                <span class="clearfix d-none d-sm-inline-block"> Logout </span>
+                                <span class="clearfix d-none d-sm-inline-block"> Выйти </span>
                             </a>
                         </li>
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link waves-effect" href="{% url 'account_login' %}">
-                                <span class="clearfix d-none d-sm-inline-block"> Login </span>
+                                <span class="clearfix d-none d-sm-inline-block"> Войти </span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link waves-effect" href="{% url 'account_signup' %}">
-                                <span class="clearfix d-none d-sm-inline-block"> Signup </span>
+                                <span class="clearfix d-none d-sm-inline-block"> Зарегистрироваться </span>
                             </a>
                         </li>
                     {% endif %}

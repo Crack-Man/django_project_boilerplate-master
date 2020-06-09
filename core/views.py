@@ -163,3 +163,8 @@ class ProfileView(ListView):
 class AboutView(ListView):
     model = Item
     template_name = "about.html"
+
+
+class Moder(ListView):
+    model = Item
+    template_name = "moder.html"
