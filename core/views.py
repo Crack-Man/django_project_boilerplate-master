@@ -71,7 +71,7 @@ def add(request):
             return redirect("../")
     else:
         form = AddSaloon()
-    return render(request, "add_image.html", {"form": AddSaloon()})
+    return render(request, "add.html", {"form": AddSaloon()})
 
 # def add(request):
 #     if request.method == "POST":

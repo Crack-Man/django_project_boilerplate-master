@@ -16,9 +16,13 @@
                 <!-- Left -->
                 <ul class="navbar-nav mr-auto">
                     {% if request.user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link waves-effect" href="/add/">Добавить салон</a>
-                        </li>
+                        {% for group in user.groups.all %}
+                            {% if group.name == 'Мастер' %}
+                                <li class="nav-item">
+                                    <a class="nav-link waves-effect" href="/add/">Добавить салон</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
                     {% endif %}
                     <li class="nav-item">
                         <a class="nav-link waves-effect" href="/about/">О нас</a>

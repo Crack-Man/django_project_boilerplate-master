@@ -11,13 +11,17 @@
 </head>
 
 <body>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <table>
-            {{ form }}
-        </table>
-        <input type="submit" value="Добавить" >
-    </form>
+    <div class='ERROR' id='ERROR' style='display: block;'>Ошибка 404</div>
+    {% if request.user.is_authenticated %}
+        <script>document.getElementById('ERROR').style.display = 'none';</script>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+                {{ form }}
+            </table>
+            <input type="submit" value="Добавить" >
+        </form>
+    {% endif %}
 </body>
 
 </html>

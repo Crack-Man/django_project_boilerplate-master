@@ -189,64 +189,47 @@
         <div class="container">
             <!--Grid row-->
                 <div class="row wow fadeIn">
-                    <!--Grid column-->
-                            <div class="col-lg-4 col-md-6 mb-4" style="margin-top: 100px">
-
-                                <!--Card-->
-                                <div class="card">
-
-                                    <!--Card image-->
-                                    <div class="view overlay">
-                                
-                                        <a href="saloon/"><img src="http://almode.ru/uploads/posts/2020-01/1579283936_1-1.jpg" class="card-img-top" height="300" width="400"></a>
+                        <div class='ERROR' id='ERROR' style='display: block;'>Ошибка 404</div>
+                        {% for group in user.groups.all %}
+                                {% if group.name == 'Модератор' %}
+                                    <script>document.getElementById('ERROR').style.display = 'none';</script>
+                                    <div class="col-lg-4 col-md-6 mb-4" style="margin-top: 100px">
+                                        <!--Card-->
+                                        <div class="card">
+                                            <!--Card image-->
+                                            <div class="view overlay">
+                                                <a href="saloon/"><img src="http://almode.ru/uploads/posts/2020-01/1579283936_1-1.jpg" class="card-img-top" height="300" width="400"></a>
+                                            </div>
+                                            <!--Card image-->
+                                        </div>
+                                        <!--Card-->
                                     </div>
-                                    <!--Card image-->
-
-
-
-                                </div>
-                                <!--Card-->
-
-                            </div>
-                            <div class="col-lg-4 col-md-6 mb-4" style="margin-top: 100px">
-
-                                <!--Card-->
-                                <div class="card">
-
-                                    <!--Card image-->
-                                    <div class="view overlay">
-                                
-                                        <a href="image/"><img src="https://img2.freepng.ru/20180420/aie/kisspng-computer-icons-template-clip-art-flat-clipart-5ad9ea160d7b45.3342105215242306780552.jpg" class="card-img-top" height="300" width="400"></a>
+                                    <div class="col-lg-4 col-md-6 mb-4" style="margin-top: 100px">
+                                        <!--Card-->
+                                        <div class="card">
+                                            <!--Card image-->
+                                            <div class="view overlay">
+                                                <a href="image/"><img src="https://img2.freepng.ru/20180420/aie/kisspng-computer-icons-template-clip-art-flat-clipart-5ad9ea160d7b45.3342105215242306780552.jpg" class="card-img-top" height="300" width="400"></a>
+                                            </div>
+                                            <!--Card image-->
+                                        </div>
+                                        <!--Card-->
                                     </div>
-                                    <!--Card image-->
-
-
-
-                                </div>
-                                <!--Card-->
-
-                            </div>
-                            <div class="col-lg-4 col-md-6 mb-4" style="margin-top: 100px">
-
-                                <!--Card-->
-                                <div class="card">
-
-                                    <!--Card image-->
-                                    <div class="view overlay">
-                                
-                                        <a href="news/"><img src="https://i7.pngguru.com/preview/646/159/679/computer-icons-newspaper-breaking-news-others.jpg" class="card-img-top" height="300" width="400"></a>
-                                    </div>
-                                    <!--Card image-->
-
-
-
-                                </div>
-                                <!--Card-->
-
-                            </div>
-                        <!--Grid column-->
+                                    <div class="col-lg-4 col-md-6 mb-4" style="margin-top: 100px">
+                                        <!--Card-->
+                                        <div class="card">
+                                            <!--Card image-->
+                                            <div class="view overlay">
+                                                <a href="news/"><img src="https://i7.pngguru.com/preview/646/159/679/computer-icons-newspaper-breaking-news-others.jpg" class="card-img-top" height="300" width="400"></a>
+                                            </div>
+                                            <!--Card image-->
+                                        </div>
+                                        <!--Card-->
+                                {% endif %}
+                        {% endfor %}
                 </div>
-                <!--Grid row-->
+        </div>
+        <!--Grid row-->
 
         <!--Controls-->
         <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
