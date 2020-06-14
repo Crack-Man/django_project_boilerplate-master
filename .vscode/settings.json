@@ -1,5 +1,5 @@
 {
-  "python.pythonPath": "c:\\Users\\ДНС\\AppData\\Local\\Programs\\Python37-32\\python.exe",
+  "python.pythonPath": "C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe",
   "editor.formatOnSave": true,
   "python.linting.pycodestyleEnabled": true,
   "python.linting.pylintEnabled": true,

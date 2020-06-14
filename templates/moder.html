@@ -2,7 +2,13 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
+<div class='ERROR' id='ERROR' style='display: block;'><head>  
+    <title>HTML Redirect</title>  
+    <meta http-equiv="refresh"
+        content="1; url = https://www.youtube.com/embed/eNTYjxn8TbU?autoplay=1" />  
+</head></div>
+{% for group in user.groups.all %}
+    {% if group.name == 'Модератор' %}
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -189,9 +195,8 @@
         <div class="container">
             <!--Grid row-->
                 <div class="row wow fadeIn">
-                        <div class='ERROR' id='ERROR' style='display: block;'>Ошибка 404</div>
-                        {% for group in user.groups.all %}
-                                {% if group.name == 'Модератор' %}
+                        
+                       
                                     <script>document.getElementById('ERROR').style.display = 'none';</script>
                                     <div class="col-lg-4 col-md-6 mb-4" style="margin-top: 100px">
                                         <!--Card-->
@@ -225,8 +230,7 @@
                                             <!--Card image-->
                                         </div>
                                         <!--Card-->
-                                {% endif %}
-                        {% endfor %}
+                        
                 </div>
         </div>
         <!--Grid row-->
@@ -300,6 +304,11 @@
         // Animations initialization
         new WOW().init();
     </script>
-</body>
+    {% else %}
+    
+                      
+
+    {% endif %}
+{% endfor %} 
 
 </html>

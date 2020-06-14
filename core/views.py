@@ -5,7 +5,8 @@ from .models import Item, Image, New
 from .forms import AddSaloon, Images, IMG, News
 from django.http import HttpResponse
 import time
-
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponseForbidden
 
 # Create your views here.
 
@@ -168,3 +169,9 @@ class AboutView(ListView):
 class Moder(ListView):
     model = Item
     template_name = "moder.html"
+
+    def my_view(request, user):
+        if not request.user.is_superuser:
+            return HttpResponseForbidden("403 Forbidden , you don't have access")
+        else:
+            return redirect("../")
