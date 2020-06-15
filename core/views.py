@@ -74,6 +74,9 @@ def add(request):
         form = AddSaloon()
     return render(request, "add.html", {"form": AddSaloon()})
 
+
+    
+
 # def add(request):
 #     if request.method == "POST":
 #         Title = request.POST.get("Title")
@@ -119,6 +122,10 @@ def add(request):
 class ItemDetailView(DetailView):
     model = Item
     template_name = "product.html"
+
+class ItemCheck(DetailView):
+    model = Item
+    template_name = "checkSaloon.html"
 
 
 class ItemModer(ListView):

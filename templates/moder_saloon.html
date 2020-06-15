@@ -120,7 +120,7 @@
                                     <div class="view overlay">
                                 
                                         <img src={% if item.image %}  "{{ item.image.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="card-img-top" height="300" width="400">
-                                        <a href="{{ item.get_absolute_url }}">
+                                        <a href="check{{ item.get_absolute_url }}">
                                             <div class="mask rgba-white-slight"></div>
                                         </a>
                                     </div>
@@ -134,7 +134,7 @@
                                         </a>
                                         <h5>
                                             <strong>
-                                                <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.title }}
+                                                <a href="check{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.title }}
                                                     <span class="badge badge-pill "></span>
                                                 </a>
                                             </strong>

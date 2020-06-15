@@ -16,6 +16,7 @@ from .views import (
     add_gallery,
     add_new
 )
+from core.views import ItemCheck
 app_name = 'core'
 
 urlpatterns = [
@@ -35,5 +36,6 @@ urlpatterns = [
     path('moder/news/', NewsModer.as_view(), name='moder_image'),
 
 
-    path('product/<slug>/', ItemDetailView.as_view(), name='product')
+    path('product/<slug>/', ItemDetailView.as_view(), name='product'),
+    path('moder/saloon/check/product/<slug>/', ItemCheck.as_view(), name='checkSaloon')
 ]

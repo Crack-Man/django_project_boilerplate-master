@@ -1,0 +1,175 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{{ item.title }}</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    {% include 'navbar.html' %}
+    <!-- Navbar -->
+    
+
+    <!--Main layout-->
+    <main class="mt-5 pt-4">
+        <div class="container dark-grey-text mt-5">
+            <!--Grid row-->
+            <div class="row wow fadeIn">
+                <!--Grid column-->
+                <div class="col-md-6 mb-4">
+                    <img src={% if item.image %}  "{{ item.image.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid"  height="400" width="400">
+                    <a href="{{ item.get_absolute_url }}"></a>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-6 mb-4">
+                    <!--Content-->
+                    <div class="p-4">
+                        <div class="mb-3">
+                            <a href="">
+                                <span class="badge purple mr-1 ">{{ object.get_category_display }}</span>
+                            </a>
+                        </div>
+                        <p class="lead">
+                            {% if object.discount_price %}
+                                <span class="mr-1">
+                                    <del>₽{{ object.price }}</del>
+                                </span>
+                                <span>₽{{ object.discount_price }}</span>
+                            {% else %}
+                                <span>₽{{ object.price }}</span>
+                            {% endif %}
+                        </p>
+                        <p class="lead font-weight-bold">Description</p>
+                        <p>{{ object.description }}</p>
+                        <form class="d-flex justify-content-left">
+                            <!-- Default input -->
+                            <button class="btn btn-primary btn-md my-0 p    "  type="submit">Book a date   
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <!--Content-->
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+            <hr>
+                <!--Grid row-->
+                <div class="row d-flex justify-content-center wow fadeIn">
+                    <!--Grid column-->
+                    <div class="col-md-6 text-center">
+                        <h4 class="my-4 h4">Additional information</h4>
+                        <p>{{ object.info }}</p>
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                <!--Grid row-->
+                <h4 class="my-4 h4 text-center">Gallery</h4>
+                <!--Grid row-->
+                <div class="row wow fadeIn  ">
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-12 mb-4    ">
+                   <img src={% if item.image1 %}  "{{ item.image1.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid"  >
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <img src={% if item.image2 %}  "{{ item.image2.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid"  >
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4" >
+                     <img src={% if item.image3 %}  "{{ item.image3.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid" >
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4" >
+                     <img src={% if item.image4 %}  "{{ item.image4.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid" >
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4" >
+                     <img src={% if item.image5 %}  "{{ item.image5.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid" >
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4" >
+                     <img src={% if item.image6 %}  "{{ item.image6.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid" >
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4" >
+                     <img src={% if item.image7 %}  "{{ item.image7.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid" >
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4" >
+                     <img src={% if item.image8 %}  "{{ item.image8.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid" >
+                </div>
+                <!--Grid column-->
+        </div>
+    </main>
+    <!--Main layout-->
+
+    <!--Footer-->
+    <footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+        <!--Call to action-->
+        
+        <!--/.Call to action-->
+
+        <hr class="my-4">
+
+        <!-- Social icons -->
+       
+        <!-- Social icons -->
+
+        <!--Copyright-->
+        <div class="footer-copyright py-3">
+            © 2020 Copyright:
+            <a href="https://www.instagram.com/mauricio_castv/" target="_blank"> Mauricio Castro Valderrama </a>
+            <a href="//www.youtube.com/embed/eNTYjxn8TbU?autoplay=1" target="_blank"> Secret </a>
+        </div>
+        <!--/.Copyright-->
+
+    </footer>
+    <!--/.Footer-->
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+    <!-- Initializations -->
+    <script type="text/javascript">
+        // Animations initialization
+        new WOW().init();
+    </script>
+</body>
+<style>
+
+</style>
+</html>
