@@ -1,12 +1,14 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView
-from .models import Item, Image, New
-from .forms import AddSaloon, Images, IMG, News
+from .models import Item, Image, New, Recording
+from .forms import AddSaloon, Images, IMG, NewsForm, Recordings
 from django.http import HttpResponse
 import time
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseForbidden
+from django.contrib.auth.models import User
+from django.views.generic.edit import FormMixin
 
 # Create your views here.
 
@@ -46,7 +48,9 @@ def add_gallery(request):
     if request.method == 'POST':
         form = IMG(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            new_post = form.save(commit=False)
+            new_post.auth = request.user
+            new_post.save()
             return redirect("../")
     else:
         form = IMG()
@@ -55,21 +59,27 @@ def add_gallery(request):
 
 def add_new(request):
     if request.method == 'POST':
-        form = News(request.POST, request.FILES)
+        form = NewsForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            new_post = form.save(commit=False)
+            new_post.auth = request.user
+            new_post.slug = str(int(time.time()))
+            new_post.save()
             return redirect("../")
     else:
-        form = News()
-    return render(request, "add_new.html", {"form": News()})
+        form = NewsForm()
+    return render(request, "add_new.html", {"form": NewsForm()})
 
 
 def add(request):
     if request.method == 'POST':
         form = AddSaloon(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect("../")
+            new_post = form.save(commit=False)
+            new_post.auth = request.user
+            new_post.slug = str(int(time.time()))
+            new_post.save()
+            return redirect("/../")
     else:
         form = AddSaloon()
     return render(request, "add.html", {"form": AddSaloon()})
@@ -118,29 +128,36 @@ def add(request):
 #     else:
 #         return render(request, "add.html", {"form": AddSaloon()})
 
-
-class ItemDetailView(DetailView):
+class ItemDetailView(FormMixin, DetailView):
     model = Item
+    form_class = Recordings
+    initial = {'key': 'value'}
     template_name = "product.html"
 
-class ItemCheck(DetailView):
-    model = Item
-    template_name = "checkSaloon.html"
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            new_post = form.save(commit=False)
+            new_post.auth = request.user
+            slug = request.path[9 : len(request.path) - 1]
+            new_post.title = slug
+            new_post.save()
+            return redirect("/../")
+        return render(request, self.template_name, {'form': form})
 
-
-class ItemModer(ListView):
-    model = Item
-    template_name = "moder_saloon.html"
-
-
-class ImgModer(ListView):
-    model = Image
-    template_name = "moder_image.html"
-
-
-class NewsModer(ListView):
+    def get_context_data(self, *args, **kwargs):
+        context = super(ItemDetailView, self).get_context_data(**kwargs)
+        context['form'] = Recordings
+        return context
+    
+class NewsView(DetailView):
     model = New
-    template_name = "moder_news.html"
+    template_name = "posts.html"
+
+class ServiceView(ListView):
+    model = Item
+    template_name = "Service.html"
 
 
 class ServiceView(ListView):
@@ -148,12 +165,7 @@ class ServiceView(ListView):
     template_name = "Service.html"
 
 
-class ServiceView(ListView):
-    model = Item
-    template_name = "Service.html"
-
-
-class NewsView(ListView):
+class News(ListView):
     model = New
     template_name = "news.html"
 
@@ -164,21 +176,10 @@ class GalleryView(ListView):
 
 
 class ProfileView(ListView):
-    model = Item
+    model = Recording
     template_name = "profile.html"
 
 
 class AboutView(ListView):
     model = Item
     template_name = "about.html"
-
-
-class Moder(ListView):
-    model = Item
-    template_name = "moder.html"
-
-    def my_view(request, user):
-        if not request.user.is_superuser:
-            return HttpResponseForbidden("403 Forbidden , you don't have access")
-        else:
-            return redirect("../")

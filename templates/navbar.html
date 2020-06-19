@@ -25,34 +25,60 @@
                         {% endfor %}
                     {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link waves-effect" href="/about/">О нас</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link waves-effect" href="/news/">Новости</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link waves-effect" href="/gallery/">Галерея</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="/about/">О нас</a>
+                    </li>
                 </ul>
 
                 <!-- Right -->
                 <ul class="navbar-nav nav-flex-icons">
+                    <li id="admin" style="display: none" class="nav-item">
+                        <a class="nav-link waves-effect" href="/admin/">
+                            <svg class="bi bi-card-list" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                                <path fill-rule="evenodd" d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z"/>
+                                <circle cx="3.5" cy="5.5" r=".5"/>
+                                <circle cx="3.5" cy="8" r=".5"/>
+                                <circle cx="3.5" cy="10.5" r=".5"/>
+                            </svg>
+
+                            <span class="clearfix d-none d-sm-inline-block" > Записи </span>
+                        </a>
+                    </li>
                     {% if request.user.is_authenticated %}
                         {% for group in user.groups.all %}
                             {% if group.name == 'Модератор' %}
-                                <li class="nav-item">
-                                    <a class="nav-link waves-effect" href="/moder/">
-                                        <i class="fas fa-users" ></i>
+                                <script>
+                                    document.getElementById('admin').style.display = 'none';
+                                </script>
+                                <li style="display: block" class="nav-item">
+                                    <a class="nav-link waves-effect" href="/admin/">
+                                        <svg class="bi bi-eye-fill" width="20px" height="20px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                            <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                        </svg>
+
                                         <span class="clearfix d-none d-sm-inline-block" > Модератор </span>
                                     </a>
                                 </li>
+                            {% elif group.name == 'Мастер' %}
+                                <script>
+                                    document.getElementById('admin').style.display = 'block';
+                                </script>
                             {% endif %}
                         {% endfor %}
                        
                         <li class="nav-item">
-                            <a class="nav-link waves-effect" href="/admin/">
-                                <i class="fas fa-users" ></i>
-                                <span class="clearfix d-none d-sm-inline-block" > Профиль </span>
+                            <a class="nav-link waves-effect" href="/profile/">
+                                <svg class="bi bi-person-lines-fill" width="20px" height="20px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm2 9a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                                </svg>
+                                <span id="user" class="clearfix d-none d-sm-inline-block" > {{request.user.username}} </span>
                             </a>
                         </li>
 

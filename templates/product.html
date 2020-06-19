@@ -16,6 +16,7 @@
     <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.title.css' %}" rel="stylesheet">
 </head>
 
 <body>
@@ -27,6 +28,10 @@
 
     <!--Main layout-->
     <main class="mt-5 pt-4">
+        <div class="header-h1">
+            <h1>{{ item.title }}</h1>
+            {{ product.product_slug }}
+        </div>
         <div class="container dark-grey-text mt-5">
             <!--Grid row-->
             <div class="row wow fadeIn">
@@ -56,14 +61,19 @@
                                 <span>₽{{ object.price }}</span>
                             {% endif %}
                         </p>
-                        <p class="lead font-weight-bold">Description</p>
-                        <p>{{ object.description }}</p>
-                        <form class="d-flex justify-content-left">
-                            <!-- Default input -->
-                            <button class="btn btn-primary btn-md my-0 p    "  type="submit">Book a date   
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </form>
+                        <p class="lead font-weight-bold">Автор:</p>
+                        <p class="text-dark">{{ object.auth }}</p>
+                        <p id="author" style='display: none'> {{item.auth}} </p>
+                        <p id="data" style='display: none'> Код салона (при поиске записей): {{item.slug}} </p>
+                        <script>
+                            if(document.getElementById('author').innerHTML == document.getElementById('user').innerHTML) {
+                                document.getElementById('data').style.display = 'block';
+                            }
+                        </script>
+                        {% if item.description %}
+                            <p class="lead font-weight-bold">Адрес:</p>
+                            <p class="text-dark">{{ object.description }}</p>
+                        {% endif %}
                     </div>
                     <!--Content-->
                 </div>
@@ -75,15 +85,23 @@
                 <!--Grid row-->
                 <div class="row d-flex justify-content-center wow fadeIn">
                     <!--Grid column-->
-                    <div class="col-md-6 text-center">
-                        <h4 class="my-4 h4">Additional information</h4>
-                        <p>{{ object.info }}</p>
-                    </div>
+                        {% if object.info %}
+                            <div class="col-md-12">
+                                <h4 class="my-4 h4 text-center">Описание салона</h4>
+                            </div>
+                            <div class="border rounded col-md-12 col-md-offset-3">
+                                <p>{{ object.info }}</p>
+                            </div>
+                        {% endif %}
+
+                        
+                    
                     <!--Grid column-->
 
                 </div>
                 <!--Grid row-->
-                <h4 class="my-4 h4 text-center">Gallery</h4>
+                
+                <h4 class="my-4 h4 text-center">Галерея</h4>
                 <!--Grid row-->
                 <div class="row wow fadeIn  ">
                 <!--Grid column-->
@@ -128,7 +146,22 @@
                 <!--Grid column-->
         </div>
     </main>
+            <div id="rec" style="display: block">
+                <h4 class="my-4 h4 text-center">Записаться</h4>
+                <form style="margin-left: 25%" class="border col-lg-6" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <table>
+                        {{ form }}
+                    </table>
+                    <input class="btn btn-primary btn-md my-0 p" type="submit" value="Записаться" >
+                    <br>
+                    <br>
+                </form>
+            </div>
+            
+            
     <!--Main layout-->
+    
 
     <!--Footer-->
     <footer class="page-footer text-center font-small mt-4 wow fadeIn">
@@ -146,8 +179,7 @@
         <!--Copyright-->
         <div class="footer-copyright py-3">
             © 2020 Copyright:
-            <a href="https://www.instagram.com/mauricio_castv/" target="_blank"> Mauricio Castro Valderrama </a>
-            <a href="//www.youtube.com/embed/eNTYjxn8TbU?autoplay=1" target="_blank"> Secret </a>
+            <a href="https://www.instagram.com/mauricio_castv/" target="_blank"> AllNails </a>
         </div>
         <!--/.Copyright-->
 

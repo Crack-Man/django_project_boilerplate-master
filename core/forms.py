@@ -1,13 +1,12 @@
 from django import forms
-from .models import Image, Item, New
+from .models import Image, Item, New, Recording
 from django.forms import ModelForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 
 CAT_CHOICES = (
-    ('S', 'Professional'),
-    ('SW', 'Normal'),
-    ('OW', 'At home')
+    ('S', 'Обычный'),
+    ('H', 'На дому')
 )
 
 CATEGORY_USER = (
@@ -20,7 +19,9 @@ class AddSaloon(forms.ModelForm):
     class Meta:
         model = Item
         fields = (
+            'auth',
             'title',
+            'slug',
             'price',
             'discount_price',
             'category',
@@ -36,6 +37,7 @@ class AddSaloon(forms.ModelForm):
             'image7',
             'image8',
         )
+        exclude = ['auth', 'slug']
     # Title = forms.CharField(label="Название салона")
     # Price = forms.FloatField(label="Стоимость")
     # Discount_Price = forms.FloatField(
@@ -60,13 +62,21 @@ class AddSaloon(forms.ModelForm):
 class IMG(forms.ModelForm):
     class Meta:
         model = Image
-        fields = ('image', )
+        fields = ('image', 'auth')
+        exclude = ['auth']
 
 
-class News(forms.ModelForm):
+class NewsForm(forms.ModelForm):
     class Meta:
         model = New
-        fields = ('title', 'info', 'image')
+        fields = ('title', 'slug', 'info', 'image', 'auth')
+        exclude = ['slug', 'auth']
+
+class Recordings(forms.ModelForm):
+    class Meta:
+        model = Recording
+        fields = ('title', 'auth', 'call', 'text')
+        exclude = ['title', 'auth']
 
 
 class Images(forms.ModelForm):
