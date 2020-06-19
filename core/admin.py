@@ -30,3 +30,4 @@ class PostAdmin(admin.ModelAdmin):
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'auth', 'call')
     search_fields = ('id', 'title')
+    list_filter = ['title']

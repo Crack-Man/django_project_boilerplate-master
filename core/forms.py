@@ -96,9 +96,11 @@ class SignupForm(forms.ModelForm):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         category = self.cleaned_data['category']
-
+        if category == 'М':
+            user.is_staff = True
         user.save()
         if category == 'К':
             user.groups.add(Group.objects.get(name='Клиент'))
         elif category == 'М':
             user.groups.add(Group.objects.get(name='Мастер'))
+            
