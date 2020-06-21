@@ -65,14 +65,17 @@
                         <p class="text-dark">{{ object.auth }}</p>
                         <p id="author" style='display: none'> {{item.auth}} </p>
                         <p id="data" style='display: none'> Код салона (при поиске записей): {{item.slug}} </p>
+                        <a href="../../admin/core/recording/?q={{item.slug}}" id="data1" style='display: none'> Список записей </a>
                         <script>
                             if(document.getElementById('author').innerHTML == document.getElementById('user').innerHTML) {
                                 document.getElementById('data').style.display = 'block';
+                                document.getElementById('data1').style.display = 'block';
                             }
                         </script>
                         {% if item.description %}
+                            <br>
                             <p class="lead font-weight-bold">Адрес:</p>
-                            <p class="text-dark">{{ object.description }}</p>
+                            <p class="text-dark">{{ object.description|linebreaks }}</p>
                         {% endif %}
                     </div>
                     <!--Content-->
@@ -90,7 +93,15 @@
                                 <h4 class="my-4 h4 text-center">Описание салона</h4>
                             </div>
                             <div class="border rounded col-md-12 col-md-offset-3">
-                                <p>{{ object.info }}</p>
+                                <p>{{ object.info|linebreaks }}</p>
+                            </div>
+                        {% endif %}
+                        {% if object.services %}
+                            <div class="col-md-12">
+                                <h4 class="my-4 h4 text-center">Список услуг:</h4>
+                            </div>
+                            <div class="border rounded col-md-12 col-md-offset-3">
+                                <p>{{ object.services|linebreaks }}</p>
                             </div>
                         {% endif %}
 

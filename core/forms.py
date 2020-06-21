@@ -27,6 +27,7 @@ class AddSaloon(forms.ModelForm):
             'category',
             'description',
             'info',
+            'services',
             'image',
             'image1',
             'image2',

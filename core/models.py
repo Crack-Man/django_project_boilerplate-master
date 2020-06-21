@@ -20,17 +20,19 @@ CATEGORY_USER = (
 class Item(models.Model):
     auth = models.ForeignKey('auth.User', on_delete=models.CASCADE,
     null=True)
-    title = models.CharField("Название салона", max_length=100)
-    price = models.CharField("Стоимость", max_length=100)
+    title = models.CharField("Название салона*", max_length=100)
+    price = models.CharField("Стоимость*", max_length=100)
     discount_price = models.CharField(
-        "Стоимость со скидкой (необязательно)", max_length=100, blank=True, null=True)
+        "Стоимость со скидкой", max_length=100, blank=True, null=True)
     category = models.CharField(
-        "Категория мастера", choices=CATEGORY_CHOICES, max_length=2)
+        "Категория мастера*", choices=CATEGORY_CHOICES, max_length=2)
     slug = models.SlugField("Ссылка на салон")
-    description = models.TextField("Адрес", blank=True, null=True)
+    description = models.CharField("Адрес", max_length=100, blank=True, null=True)
     info = models.TextField(
         "Описание салона", max_length=10000, blank=True)
-    image = models.ImageField("Обложка салона", default='')
+    services = models.TextField(
+        "Список услуг", max_length=10000, blank=True)
+    image = models.ImageField("Обложка салона*", default='')
     image1 = models.ImageField(
         "Примеры дизайнов", null=True, blank=True)
     image2 = models.ImageField(
