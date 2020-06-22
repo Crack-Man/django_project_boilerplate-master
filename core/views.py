@@ -28,6 +28,11 @@ class HomeView(ListView):
     model = Item
     template_name = "home.html"
 
+    def get_ordering(self):
+        ordering = self.request.GET.get('ordering', '-slug')
+        # validate ordering here
+        return ordering
+
 
 # def add_gallery(request):
 #     if request.method == "POST":

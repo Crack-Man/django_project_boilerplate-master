@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django import forms
 from .models import Image, Item, New, Recording
 from django.forms import ModelForm
@@ -5,13 +6,13 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 
 CAT_CHOICES = (
-    ('S', 'Обычный'),
-    ('H', 'На дому')
+    ('S', u'Обычный'),
+    ('H', u'На дому')
 )
 
 CATEGORY_USER = (
-    ('К', 'Клиент'),
-    ('М', 'Мастер')
+    (u'К', u'Клиент'),
+    (u'М', u'Мастер')
 )
 
 
@@ -76,18 +77,18 @@ class NewsForm(forms.ModelForm):
 class Recordings(forms.ModelForm):
     class Meta:
         model = Recording
-        fields = ('title', 'auth', 'call', 'text')
+        fields = ('title', 'name', 'auth', 'call', 'text')
         exclude = ['title', 'auth']
 
 
 class Images(forms.ModelForm):
-    Image = forms.ImageField(label="Добавьте картинку")
+    Image = forms.ImageField(label=u"Добавьте картинку")
 
 
 class SignupForm(forms.ModelForm):
-    first_name = forms.CharField(label='Имя', max_length=100)
-    last_name = forms.CharField(label='Фамилия', max_length=100)
-    category = forms.ChoiceField(label='Категория', choices=CATEGORY_USER)
+    first_name = forms.CharField(label=u'Имя', max_length=100)
+    last_name = forms.CharField(label=u'Фамилия', max_length=100)
+    category = forms.ChoiceField(label=u'Категория', choices=CATEGORY_USER)
 
     class Meta:
         model = get_user_model()
@@ -97,11 +98,11 @@ class SignupForm(forms.ModelForm):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         category = self.cleaned_data['category']
-        if category == 'М':
+        if category == u'М':
             user.is_staff = True
         user.save()
-        if category == 'К':
-            user.groups.add(Group.objects.get(name='Клиент'))
-        elif category == 'М':
-            user.groups.add(Group.objects.get(name='Мастер'))
+        if category == u'К':
+            user.groups.add(Group.objects.get(name=u'Клиент'))
+        elif category == u'М':
+            user.groups.add(Group.objects.get(name=u'Мастер'))
             

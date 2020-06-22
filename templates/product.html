@@ -51,6 +51,7 @@
                                 <span class="badge purple mr-1 ">{{ object.get_category_display }}</span>
                             </a>
                         </div>
+                        <p class="lead font-weight-bold">Средняя цена услуг:</p>
                         <p class="lead">
                             {% if object.discount_price %}
                                 <span class="mr-1">
@@ -111,52 +112,70 @@
 
                 </div>
                 <!--Grid row-->
-                
-                <h4 class="my-4 h4 text-center">Галерея</h4>
+                {% if item.image1 or item.image2 or item.image3 or item.image4 or item.image5 or item.image6 or item.image7 or item.image8 %}
+                    <h4 class="my-4 h4 text-center">Галерея</h4>
+                {% endif %}
                 <!--Grid row-->
                 <div class="row wow fadeIn  ">
                 <!--Grid column-->
-                <div class="col-lg-4 col-md-12 mb-4    ">
-                   <img src={% if item.image1 %}  "{{ item.image1.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid"  >
-                </div>
+                {% if item.image1 %}
+                    <div class="col-lg-4 col-md-12 mb-4    ">
+                        <img src=  "{{ item.image1.url }}" class="img-fluid"  >
+                    </div>
+                {% endif %}
                 <!--Grid column-->
                 <!--Grid column-->
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <img src={% if item.image2 %}  "{{ item.image2.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid"  >
-                </div>
+                {% if item.image2 %}
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <img src={% if item.image2 %}  "{{ item.image2.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid"  >
+                    </div>
+                {% endif %}
                 <!--Grid column-->
                 <!--Grid column-->
-                <div class="col-lg-4 col-md-6 mb-4" >
-                     <img src={% if item.image3 %}  "{{ item.image3.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid" >
-                </div>
+                {% if item.image3 %}
+                    <div class="col-lg-4 col-md-6 mb-4" >
+                        <img src={% if item.image3 %}  "{{ item.image3.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid" >
+                    </div>
+                {% endif %}
                 <!--Grid column-->
                 <!--Grid column-->
-                <div class="col-lg-4 col-md-6 mb-4" >
-                     <img src={% if item.image4 %}  "{{ item.image4.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid" >
-                </div>
+                {% if item.image4 %}
+                    <div class="col-lg-4 col-md-6 mb-4" >
+                        <img src={% if item.image4 %}  "{{ item.image4.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid" >
+                    </div>
+                {% endif %}
                 <!--Grid column-->
                 <!--Grid column-->
-                <div class="col-lg-4 col-md-6 mb-4" >
-                     <img src={% if item.image5 %}  "{{ item.image5.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid" >
-                </div>
+                {% if item.image5 %}
+                    <div class="col-lg-4 col-md-6 mb-4" >
+                        <img src={% if item.image5 %}  "{{ item.image5.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid" >
+                    </div>
+                {% endif %}
                 <!--Grid column-->
                 <!--Grid column-->
-                <div class="col-lg-4 col-md-6 mb-4" >
-                     <img src={% if item.image6 %}  "{{ item.image6.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid" >
-                </div>
+                {% if item.image6 %}
+                    <div class="col-lg-4 col-md-6 mb-4" >
+                        <img src={% if item.image6 %}  "{{ item.image6.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid" >
+                    </div>
+                {% endif %}
                 <!--Grid column-->
                 <!--Grid column-->
-                <div class="col-lg-4 col-md-6 mb-4" >
-                     <img src={% if item.image7 %}  "{{ item.image7.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid" >
-                </div>
+                {% if item.image7 %}
+                    <div class="col-lg-4 col-md-6 mb-4" >
+                        <img src={% if item.image7 %}  "{{ item.image7.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid" >
+                    </div>
+                {% endif %}
                 <!--Grid column-->
                 <!--Grid column-->
-                <div class="col-lg-4 col-md-6 mb-4" >
-                     <img src={% if item.image8 %}  "{{ item.image8.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid" >
-                </div>
+                {% if item.image8 %}
+                    <div class="col-lg-4 col-md-6 mb-4" >
+                        <img src={% if item.image8 %}  "{{ item.image8.url }}"{% else %}"/media/noimage.jpg"{% endif %} class="img-fluid" >
+                    </div>
+                {% endif %}
                 <!--Grid column-->
         </div>
     </main>
+        {% if request.user.is_authenticated %}
             <div id="rec" style="display: block">
                 <h4 class="my-4 h4 text-center">Записаться</h4>
                 <form style="margin-left: 25%" class="border col-lg-6" method="POST" enctype="multipart/form-data">
@@ -169,6 +188,7 @@
                     <br>
                 </form>
             </div>
+        {% endif %}
             
             
     <!--Main layout-->

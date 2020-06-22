@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.conf import settings
 from django.db import models
 from django.shortcuts import reverse
@@ -6,13 +7,13 @@ from django.contrib.auth.models import User
 from django.utils.text import slugify
 
 CATEGORY_CHOICES = (
-    ('S', 'Обычный'),
-    ('H', 'На дому')
+    ('S', u'Обычный'),
+    ('H', u'На дому')
 )
 
 CATEGORY_USER = (
-    ('К', 'Клиент'),
-    ('М', 'Мастер')
+    (u'К', u'Клиент'),
+    (u'М', u'Мастер')
 )
 
 
@@ -20,21 +21,21 @@ CATEGORY_USER = (
 class Item(models.Model):
     auth = models.ForeignKey('auth.User', on_delete=models.CASCADE,
     null=True)
-    title = models.CharField("Название салона*", max_length=100)
-    price = models.CharField("Стоимость*", max_length=100)
+    title = models.CharField(u"Название салона*", max_length=100)
+    price = models.CharField(u"Стоимость*", max_length=100)
     discount_price = models.CharField(
-        "Стоимость со скидкой", max_length=100, blank=True, null=True)
+        u"Стоимость со скидкой", max_length=100, blank=True, null=True)
     category = models.CharField(
-        "Категория мастера*", choices=CATEGORY_CHOICES, max_length=2)
-    slug = models.SlugField("Ссылка на салон")
-    description = models.CharField("Адрес", max_length=100, blank=True, null=True)
+        u"Категория мастера*", choices=CATEGORY_CHOICES, max_length=2)
+    slug = models.SlugField(u"Ссылка на салон")
+    description = models.CharField(u"Адрес", max_length=100, blank=True, null=True)
     info = models.TextField(
-        "Описание салона", max_length=10000, blank=True)
+        u"Описание салона", max_length=10000, blank=True)
     services = models.TextField(
-        "Список услуг", max_length=10000, blank=True)
-    image = models.ImageField("Обложка салона*", default='')
+        u"Список услуг", max_length=10000, blank=True)
+    image = models.ImageField(u"Обложка салона*", default='')
     image1 = models.ImageField(
-        "Примеры дизайнов", null=True, blank=True)
+        u"Примеры дизайнов", null=True, blank=True)
     image2 = models.ImageField(
         "", null=True, blank=True)
     image3 = models.ImageField(
@@ -49,7 +50,7 @@ class Item(models.Model):
         "", null=True, blank=True)
     image8 = models.ImageField(
         "", null=True, blank=True)
-    status = models.BooleanField("Подтверждён", default=False)
+    status = models.BooleanField(u"Подтверждён", default=False)
 
     def __str__(self):
         return self.title
@@ -65,18 +66,19 @@ class Item(models.Model):
 
 
 class Recording(models.Model):
-    title = models.CharField("Ссылка на салон", max_length=140)
+    title = models.CharField(u"Ссылка на салон", max_length=140)
+    name = models.CharField(u"ФИО", max_length=140)
     auth = models.ForeignKey('auth.User', on_delete=models.CASCADE,
     null=True)
-    call = models.CharField("Номер телефона", max_length=100)
-    text = models.TextField("Расскажите о предпочтительном времени, добавьте дополнительную информацию", max_length=140, blank=True)
+    call = models.CharField(u"Номер телефона", max_length=100)
+    text = models.TextField(u"Расскажите о предпочтительном времени, добавьте дополнительную информацию", max_length=140, blank=True)
 
 
 class Image(models.Model):
     auth = models.ForeignKey('auth.User', on_delete=models.CASCADE,
     null=True)
     image = models.ImageField(
-        "Изображение", upload_to='media/', default='')
+        u"Изображение", upload_to='media/', default='')
     status = models.BooleanField(default=False)
 
 
@@ -84,12 +86,12 @@ class Image(models.Model):
 class New(models.Model):
     auth = models.ForeignKey('auth.User',on_delete=models.CASCADE,
     null=True)
-    title = models.CharField("Заголовок", max_length=100)
+    title = models.CharField(u"Заголовок", max_length=100)
     info = models.TextField(
-        "Содержание", max_length=10000)
+        u"Содержание", max_length=10000)
     image = models.ImageField(
-        "Обложка", upload_to='media/', default='', blank=True)
-    slug = models.SlugField("Ссылка на статью")
+        u"Обложка", upload_to='media/', default='', blank=True)
+    slug = models.SlugField(u"Ссылка на статью")
     status = models.BooleanField(default=False)
 
     def get_absolute_url(self):

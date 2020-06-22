@@ -39,35 +39,35 @@
             <!--/First slide-->
 
             <!--Second slide-->
-            <div class="carousel-item">
-                <div class="view" style="background-image: url('https://avatars.mds.yandex.net/get-pdb/1801054/fdb171f8-29d6-4572-b8d1-cfe05fc7d22f/s1200?webp=false'); background-repeat: no-repeat; background-size: cover;">
+             
+                <div class="carousel-item">
+                    <div class="view" style="background-image: url('https://avatars.mds.yandex.net/get-pdb/1801054/fdb171f8-29d6-4572-b8d1-cfe05fc7d22f/s1200?webp=false'); background-repeat: no-repeat; background-size: cover;">
+                        <!-- Mask & flexbox options-->
+                        <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
 
-                    <!-- Mask & flexbox options-->
-                    <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
+                            <!-- Content -->
+                            <div class="text-center white-text mx-5 wow fadeIn">
+                                <h1 class="mb-4">
+                                    <strong>У вас есть свой салон красоты?</strong>
+                                </h1>
 
-                        <!-- Content -->
-                        <div class="text-center white-text mx-5 wow fadeIn">
-                            <h1 class="mb-4">
-                                <strong>У вас есть свой салон красоты?</strong>
-                            </h1>
+                                <p>
+                                    <strong>Замечательно! Создайте на нашем сайте свой салон.</strong>
+                                </p>
+                                {% if not request.user.is_authenticated %}
+                                    <p class="mb-4 d-none d-md-block">
+                                        <strong>Но для начала зарегистрируйтесь в качестве мастера.</strong>
+                                    </p>
+                                    <a target="_blank" href="{% url 'account_signup' %}" class="btn btn-outline-white btn-lg">Создать аккаунт<i class="fas fa-user-circle"></i></a>
+                                {% endif %}
+                            </div>
+                            <!-- Content -->
 
-                            <p>
-                                <strong>Замечательно! Создайте на нашем сайте свой салон.</strong>
-                            </p>
-
-                            <p class="mb-4 d-none d-md-block">
-                                <strong>Но для начала зарегистрируйтесь в качестве мастера.</strong>
-                            </p>
-
-                            <a target="_blank" href="{% url 'account_signup' %}" class="btn btn-outline-white btn-lg">Создать аккаунт<i class="fas fa-user-circle"></i></a>
                         </div>
-                        <!-- Content -->
-
+                        <!-- Mask & flexbox options-->
                     </div>
-                    <!-- Mask & flexbox options-->
-
                 </div>
-            </div>
+            
             <!--/Second slide-->
 
             <!--Third slide-->
