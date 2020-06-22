@@ -1,22 +1,81 @@
-{% extends "socialaccount/base.html" %}
+ {% extends "account/base.html" %}
 
 {% load i18n %}
 
 {% block head_title %}{% trans "Signup" %}{% endblock %}
+{% load static %}
+  
+  <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>AllNails</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+    <style type="text/css">
+        html,
+        body,
+        header,
+        .carousel {
+            height: 60vh;
+        }
+        
+        @media (max-width: 740px) {
+            html,
+            body,
+            header,
+            .carousel {
+                height: 100vh;
+            }
+        }
+        
+        @media (min-width: 800px) and (max-width: 850px) {
+            html,
+            body,
+            header,
+            .carousel {
+                height: 100vh;
+            }
+        }
+    </style>
+</head>
+ 
+  <main>
+  
+        <div class="container">
+            <section class="text-center mb-4">
 
-{% block content %}
-    <h1>{% trans "Sign Up" %}</h1>
+                <!--Grid row-->
+                <div class="row wow fadeIn">
+                  <div class= 'col-12'>
 
-<p>{% blocktrans with provider_name=account.get_provider.name site_name=site.name %}Вы собираетесь использовать свой аккаунт {{provider_name}} для входа на сайт
-{{site_name}}. В качестве последнего шага, пожалуйста, заполните следующую форму:{% endblocktrans %}</p>
+                                  {% block content %}
+                                  <h1>{% trans "Регистрация" %}</h1>
 
-<form class="signup" id="signup_form" method="post" action="{% url 'socialaccount_signup' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
-</form>
+                                  <p>{% blocktrans %}Уже есть аккаунт? Тогда <a href="{{ login_url }}">авторизуйтесь в системе</a>.{% endblocktrans %}</p>
 
-{% endblock %}
+                                <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+                                  {% csrf_token %}
+                                  {{ form.as_p }}
+                                  {% if redirect_field_value %}
+                                  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                                  {% endif %}
+                                  <button type="submit">{% trans "Регистрация" %} &raquo;</button>
+                                  
+                                </form>
+                    </div>
+                  </div>
+          </section>
+    </div>
+  </main> 
+                                  {% endblock %}
+
+</html>

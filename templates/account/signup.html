@@ -1,22 +1,186 @@
-{% extends "account/base.html" %}
+
+ {% extends "account/base.html" %}
 
 {% load i18n %}
 
 {% block head_title %}{% trans "Signup" %}{% endblock %}
-
-{% block content %}
-<h1>{% trans "Регистрация" %}</h1>
-
-<p>{% blocktrans %}Уже есть аккаунт? Тогда <a href="{{ login_url }}">авторизуйтесь в системе</a>.{% endblocktrans %}</p>
-
-<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <button type="submit">{% trans "Регистрация" %} &raquo;</button>
+ {% block content %}
+{% load static %}
   
-</form>
+  <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>AllNails</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+    <style type="text/css">
+        html,
+        body,
+        header,
+        .carousel {
+            height: 60vh;
+        }
+        
+        @media (max-width: 740px) {
+            html,
+            body,
+            header,
+            .carousel {
+                height: 100vh;
+            }
+        }
+        
+        @media (min-width: 800px) and (max-width: 850px) {
+            html,
+            body,
+            header,
+            .carousel {
+                height: 100vh;
+            }
+        }
+    </style>
+</head>
+ <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+        <div class="container">
 
-{% endblock %}
+            <!-- Brand -->
+            <a class="navbar-brand waves-effect" href="/./">
+                <strong class="blue-text">AllNails</strong>
+            </a>
+
+            <!-- Collapse -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Links -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left -->
+                <ul class="navbar-nav mr-auto">
+                    {% if request.user.is_authenticated %}
+                        {% for group in user.groups.all %}
+                            {% if group.name == 'Мастер' %}
+                                <li class="nav-item">
+                                    <a class="nav-link waves-effect" href="/add/">Добавить салон</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="/news/">Новости</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="/gallery/">Галерея</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="/about/">О нас</a>
+                    </li>
+                </ul>
+
+                <!-- Right -->
+                <ul class="navbar-nav nav-flex-icons">
+                    <li id="admin" style="display: none" class="nav-item">
+                        <a class="nav-link waves-effect" href="/admin/">
+                            <svg class="bi bi-card-list" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                                <path fill-rule="evenodd" d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z"/>
+                                <circle cx="3.5" cy="5.5" r=".5"/>
+                                <circle cx="3.5" cy="8" r=".5"/>
+                                <circle cx="3.5" cy="10.5" r=".5"/>
+                            </svg>
+
+                            <span class="clearfix d-none d-sm-inline-block" > Записи </span>
+                        </a>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                        {% for group in user.groups.all %}
+                            {% if group.name == 'Модератор' %}
+                                <script>
+                                    document.getElementById('admin').style.display = 'none';
+                                </script>
+                                <li style="display: block" class="nav-item">
+                                    <a class="nav-link waves-effect" href="/admin/">
+                                        <svg class="bi bi-eye-fill" width="20px" height="20px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                            <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                        </svg>
+
+                                        <span class="clearfix d-none d-sm-inline-block" > Модератор </span>
+                                    </a>
+                                </li>
+                            {% elif group.name == 'Мастер' %}
+                                <script>
+                                    document.getElementById('admin').style.display = 'block';
+                                </script>
+                            {% endif %}
+                        {% endfor %}
+                       
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect" href="/profile/">
+                                <svg class="bi bi-person-lines-fill" width="20px" height="20px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7 1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm2 9a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+                                </svg>
+                                <span id="user" class="clearfix d-none d-sm-inline-block" > {{request.user.username}} </span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect" href="{% url 'account_logout' %}">
+                                <span class="clearfix d-none d-sm-inline-block"> Выйти </span>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect" href="{% url 'account_login' %}">
+                                <span class="clearfix d-none d-sm-inline-block"> Войти </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+<main class="mt-5 pt-4">
+  
+        <div class="container">
+            <section class="text-center mb-4">
+
+                <!--Grid row-->
+                <div class="row wow fadeIn">
+                  <div class= 'col-12'>
+
+                                 
+                                  <h1>{% trans "Регистрация" %}</h1>
+
+                                  <p>{% blocktrans %}Уже есть аккаунт? Тогда <a href="{{ login_url }}">авторизуйтесь в системе</a>.{% endblocktrans %}</p>
+
+                                <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+                                  {% csrf_token %}
+                                  {{ form.as_p }}
+                                  {% if redirect_field_value %}
+                                  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                                  {% endif %}
+                                  <button type="submit">{% trans "Регистрация" %} &raquo;</button>
+                                  
+                                </form>
+                    </div>
+                  </div>
+          </section>
+    </div>
+  </main> 
+                                  {% endblock %}
+
+</html>
